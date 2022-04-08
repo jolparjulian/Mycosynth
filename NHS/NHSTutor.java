@@ -5,8 +5,8 @@ import java.awt.Desktop;
 
 public class NHSTutor {
 	public static void main(String[] args) throws IOException {
-		File inFile = new File("C:\\Users\\jolpa\\OneDrive\\Desktop\\nhs1.txt");
-		File outFile = new File("C:\\Users\\jolpa\\OneDrive\\Desktop\\nhs2.txt");
+		File inFile = new File("C:\\Users\\jolpa\\OneDrive\\Desktop\\Codes\\NHS\\nhs1.txt");
+		File outFile = new File("C:\\Users\\jolpa\\OneDrive\\Desktop\\Codes\\NHS\\nhs2.txt");
 		Scanner input = new Scanner(inFile);
 		
 		ArrayList<tutor> tutorList = new ArrayList<>();

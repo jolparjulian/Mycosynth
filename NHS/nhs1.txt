@@ -44,7 +44,7 @@ nkemakonam-agbu@pgcps.org	5:00-5:30, 5:30-6:00	English, Government, History	Mond
 ijeamaka2-onuorah@pgcps.org	4:30-5:00, 5:00-5:30	English, History, Algebra I or II, Statistics	Monday, Wednesday	0
 mawa-clarke@pgcps.org	4:30-5:00	English, Algebra I or II, Geometry/Trigonometry, Pre-Calculus/Calculus, Computer Science	Monday, Wednesday	1
 rayquan-williams@pgcps.org	4:30-5:00, 5:00-5:30	Algebra I or II, Geometry/Trigonometry, Pre-Calculus/Calculus, Physics, Computer Science	Monday, Wednesday	1
-man-lun@pgcps.org	5:30-6:00	Algebra I or II, Geometry/Trigonometry, Pre-Calculus/Calculus	Monday, Wednesday	0
+man-lun@pgcps.org	5:30-6:00	Algebra I or II, Geometry/Trigonometry, Pre-Calculus/Calculus	Monday, Wednesday	3
 luca-pedone@pgcps.org	5:00-5:30	Algebra I or II, Geometry/Trigonometry, Pre-Calculus/Calculus, Biology, SAT/ACT	Monday, Wednesday	1
 kelseyo-afoakwa@pgcps.org	5:30-6:00	Algebra I or II, Geometry/Trigonometry, Chemistry, SAT/ACT	Monday, Wednesday	0
 sarah-ahmad@pgcps.org	5:00-5:30, 5:30-6:00	Algebra I or II, Geometry/Trigonometry, Biology	Monday, Wednesday	0
@@ -54,7 +54,7 @@ justin-tubilla@pgcps.org	5:00-5:30, 5:30-6:00	Algebra I or II, Pre-Calculus/Calc
 oladipo-omokanwaye@pgcps.org	5:00-5:30, 5:30-6:00	Algebra I or II, Geometry/Trigonometry, Pre-Calculus/Calculus, Chemistry, Physics, SAT/ACT	Monday, Wednesday	0
 mandy2-zhang@pgcps.org	4:30-5:00, 5:00-5:30	Algebra I or II, Geometry/Trigonometry	Monday, Wednesday	1
 kyle-krieger@pgcps.org	4:30-5:00, 5:00-5:30	Algebra I or II, Geometry/Trigonometry, Pre-Calculus/Calculus, Chemistry, Physics	Monday, Wednesday	0
-julian-cooper@pgcps.org	5:00-5:30, 5:30-6:00	Algebra I or II, Geometry/Trigonometry, Pre-Calculus/Calculus, Biology, Physics	Monday, Wednesday	0
+julian-cooper@pgcps.org	5:00-5:30, 5:30-6:00	Algebra I or II, Geometry/Trigonometry, Pre-Calculus/Calculus, Biology, Physics	Monday, Wednesday	1
 henry-renze@pgcps.org	4:30-5:00, 5:00-5:30, 5:30-6:00	Pre-Calculus/Calculus, Chemistry, SAT/ACT	Monday, Wednesday	0
 ezekiel-franklin@pgcps.org	5:00-5:30	Algebra I or II, Pre-Calculus, Geometry, SAT/ACT	Monday, Wednesday	0
 chad-bo@pgcps.org	4:30-5:00, 5:00-5:30, 5:30-6:00	Algebra I or II, Pre-Calculus/Calculus, Physics, Computer Science, SAT/ACT	Monday, Wednesday	2
@@ -68,7 +68,7 @@ ugonna-ejekwu@pgcps.org	4:30-5:00, 5:00-5:30, 5:30-6:00	English, History, Algebr
 bitmia-gang@pgcps.org	5:00-5:30, 5:30-6:00	History, Algebra I or II, Biology	Wednesday	0
 michel-batressanchez@pgcps.org	4:30-5:00	English, Algebra I or II, Geometry/Trigonometry, Biology	Wednesday	0
 etihengo-tewan@pgcps.org	4:30-5:00	Algebra I or II	Wednesday	0
-benjamin-leyson@pgcps.org	4:30-5:00	English, Algebra I or II	Wednesday	0
+benjamin-leyson@pgcps.org	4:30-5:00	English, Government, History, Algebra I or II, Pre-Calculus/Calculus, Biology	Wednesday	0
 jose-coreasgiron@pgcps.org	4:30-5:00	History, Algebra I or II	Wednesday	0
 motunrayo-rufai@pgcps.org	5:30-6:00	English, Government, Biology	Wednesday	0
 marieme-mbaye@pgcps.org	5:00-5:30, 5:30-6:00	English, Geometry/Trigonometry, Chemistry	Wednesday	0
@@ -104,7 +104,7 @@ genesis-richards@pgcps.org	4:30-5:00, 5:00-5:30, 5:30-6:00	English, Government, 
 ameena-khan@pgcps.org	5:30-6:00	English, Algebra I or II, Chemistry	Wednesday	0
 hao-chen@pgcps.org	5:30-6:00	Computer Science, SAT/ACT	Wednesday	0
 ashley-tadikonda@pgcps.org	4:30-5:00, 5:00-5:30, 5:30-6:00	Algebra I or II, Pre-Calculus/Calculus, SAT/ACT	Wednesday	0
-mary-gbenro@pgcps.org	5:00-5:30, 5:30-6:00	Government, Pre-Calculus/Calculus, Statistics, Chemistry, Physics	Wednesday	0
+mary-gbenro@pgcps.org	5:00-5:30, 5:30-6:00	Government, Pre-Calculus/Calculus, Statistics, Chemistry, Physics	Wednesday	4
 nicholasm-seecharan@pgcps.org	4:30-5:00, 5:00-5:30, 5:30-6:00	English, Government, History, Algebra I or II, Geometry/Trigonometry, Biology, Chemistry	Wednesday	1
 alan-zheng@pgcps.org	5:00-5:30	Algebra I or II, Pre-Calculus/Calculus, Physics	Wednesday	0
 matthewl-yu@pgcps.org	4:30-5:00	Geometry/Trigonometry, Pre-Calculus/Calculus, Statistics, Physics, Computer Science, SAT/ACT	Wednesday	0
@@ -117,15 +117,6 @@ genesis-barboza@pgcps.org	5:30-6:00	English, Biology	Wednesday, Another Day	0
 amy-lepore@pgcps.org	4:30-5:00, 5:00-5:30	English, Government, History, Geometry/Trigonometry, Statistics, Biology, Chemistry	Wednesday, Another Day	2
 mikaelajanellr-gibbs@pgcps.org	5:00-5:30, 5:30-6:00	English, Algebra I or II, Geometry/Trigonometry, Biology, Chemistry	Wednesday, Another Day	0
 END
-kemauri-morton@pgcps.org	Algebra I or II	5:30-6:00
-britney-nchotaku@pgcps.org	Algebra I or II	5:30-6:00
-auri-walker@pgcps.org	Pre-Calculus/Calculus	5:00-5:30, 5:30-6:00
-hannahnorli-pengosro@pgcps.org	Pre-Calculus/Calculus	5:00-5:30
-alanis-alejandro@pgcps.org	Physics	5:30-6:00
-tamiaa-brown@pgcps.org	Pre-Calculus/Calculus	5:00-5:30, 5:30-6:00
-abdulmaleek-zubairu@pgcps.org	Pre-Calculus/Calculus	5:30-6:00
-dorcas-ogunbanwo@pgcps.org	Pre-Calculus/Calculus	5:30-6:00
-sami-choudhury@pgcps.org	Chemistry	5:00-5:30
-adesola-adekoga@pgcps.org	Pre-Calculus/Calculus	5:00-5:30
-sami-choudhury@pgcps.org	Algebra I or II	5:30-6:00
+alanis-alejandro@pgcps.org	Physics	5:00-5:30
+bisola-adeoye@pgcps.org	Pre-Calculus/Calculus	4:30-5:00
 END
