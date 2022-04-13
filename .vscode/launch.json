@@ -6,19 +6,12 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch uhh",
-            "request": "launch",
-            "mainClass": "Tests.uhh",
-            "projectName": "Codes_efaf5fbe"
-        },
-        {
-            "type": "java",
             "name": "Launch Bruh",
             "request": "launch",
             "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-16/lib\" --add-modules javafx.controls,javafx.fxml",
             "mainClass": "Tests.Bruh",
             "projectName": "Codes_efaf5fbe"
-        },
+        },        
         {
             "type": "java",
             "name": "Launch NHSTutorALT",
@@ -26,12 +19,6 @@
             "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-16/lib\" --add-modules javafx.controls,javafx.fxml",
             "mainClass": "NHS.NHSTutorALT",
             "projectName": "Codes_efaf5fbe"
-        },
-        {
-            "type": "java",
-            "name": "Launch Current File",
-            "request": "launch",
-            "mainClass": "${file}"
         },
         {
             "type": "java",

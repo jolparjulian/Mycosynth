@@ -1,14 +1,20 @@
 package NHS;
 import java.io.*;
 import java.util.*;
-import java.awt.Desktop;
 import javafx.application.*;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
+import javafx.util.Callback;
 
 public class NHSTutorALT extends Application {
 	public static void main (String[] args){
@@ -83,7 +89,7 @@ public class NHSTutorALT extends Application {
 		pane3.setAlignment(Pos.CENTER);
 		pane3.setVgap(20);
 		pane3.setHgap(20);
-		ComboBox<String> combob1 = new ComboBox<>(); //tutorList0 > email values to be added
+		ComboBox<String> combob1 = new ComboBox<>();
 		Button but7 = new Button("Save");
 		pane3.addRow(0, but7, combob1);
 		TextField tfield1 = new TextField();
@@ -179,18 +185,122 @@ public class NHSTutorALT extends Application {
 		Scene scene4 = new Scene(pane5, 1000, 700);
 
 		//tuteeOTHER pairing
-		
+		TableView<tutee> tv1 = new TableView<>();
+		TableColumn<tutee, String> emailColee = new TableColumn("Email");
+		emailColee.setCellValueFactory(new Callback<CellDataFeatures<tutee, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<tutee, String> p) {
+				return new ReadOnlyObjectWrapper(p.getValue().email);
+			}
+		});
+		TableColumn<tutee, String> subjectColee = new TableColumn("Subject");
+		subjectColee.setCellValueFactory(new Callback<CellDataFeatures<tutee, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<tutee, String> p) {
+				return new ReadOnlyObjectWrapper(p.getValue().subject);
+			}
+		});
+		emailColee.setMinWidth(200);
+		subjectColee.setMinWidth(75);
+		Button but13 = new Button("Pair");
+		but13.setPrefSize(75, 50);
+		but13.setStyle("-fx-font: 14 calibri;");
+		VBox vbox2 = new VBox(tv1, but13);
+		vbox2.setSpacing(50);
+		vbox2.setAlignment(Pos.CENTER);
+		TableView<tutor> tv2 = new TableView<>();
+		TableColumn<tutor, String> sessionColor = new TableColumn("SC");
+		sessionColor.setCellValueFactory(new Callback<CellDataFeatures<tutor, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<tutor, String> p) {
+				return new ReadOnlyObjectWrapper(p.getValue().sessionCount);
+			}
+		});
+		TableColumn<tutor, String> emailColor = new TableColumn("Email");
+		emailColor.setCellValueFactory(new Callback<CellDataFeatures<tutor, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<tutor, String> p) {
+				return new ReadOnlyObjectWrapper(p.getValue().email);
+			}
+		});
+		TableColumn<tutor, String> subjectColor = new TableColumn("Subjects");
+		subjectColor.setCellValueFactory(new Callback<CellDataFeatures<tutor, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<tutor, String> p) {
+				String sub = "";
+				for (int k = 0; k < 12; k++) {
+					if (p.getValue().subjects[k]) {
+						switch (k) {
+							case 0: sub += ("English, "); break;
+							case 1: sub += ("Government, "); break;
+							case 2: sub += ("History, "); break;
+							case 3: sub += ("Algebra 1/2, "); break;
+							case 4: sub += ("Geometry/Trig, "); break;
+							case 5: sub += ("Pre-Calc/Calc, "); break;
+							case 6: sub += ("Statistics, "); break;
+							case 7: sub += ("Biology, "); break;
+							case 8: sub += ("Chemistry, "); break;
+							case 9: sub += ("Physics, "); break;
+							case 10: sub += ("Comp Sci, "); break;
+							case 11: sub += ("SAT/ACT"); break;
+						}
+					}
+				}	
+				return new ReadOnlyObjectWrapper(sub);
+			}
+		});	
+		emailColor.setMinWidth(200);
+		subjectColor.setMinWidth(400);
+		HBox hbox7 = new HBox(vbox2, tv2);
+		hbox7.setSpacing(50);
+		hbox7.setAlignment(Pos.CENTER);
+		Text text5 = new Text("Select a tutee and then select a tutor to pair them with, then select pair.");
+		text5.setStyle("-fx-font: 20 calibri;");
+		text5.setWrappingWidth(600);
+		text5.setTextAlignment(TextAlignment.CENTER);
+		VBox vbox3 = new VBox(text5, hbox7);
+		vbox3.setSpacing(50);
+		vbox3.setAlignment(Pos.CENTER);
+		vbox3.setPadding(new Insets(100, 50, 50, 50));
+		Scene scene5 = new Scene(vbox3, 1000, 700);
 
+		//printing
+		TextArea tarea3 = new TextArea("  Timeslot    Subject         Tutor Email                      Tutee Email\n");
+		Tab tab1 = new Tab("Pairings", tarea3); //formatted pairings
+		tarea3.setStyle("-fx-font: 14 monospace");
+		TextArea tarea4 = new TextArea("  Tutor Email                      Timeslot                      Subject\n");
+		Tab tab2 = new Tab("Today's Unpaired Tutors", tarea4); //formatted tutorList0
+		tarea4.setStyle("-fx-font: 14 monospace");
+		TextArea tarea5 = new TextArea("  Tutor Email                      Timeslot                      Subject\n");
+		Tab tab3 = new Tab("All Tutors", tarea5); //formatted tutorList
+		tarea5.setStyle("-fx-font: 14 monospace");
+		TextArea tarea6 = new TextArea("Tutee Email                      Timeslot                      Subject\n");
+		Tab tab4 = new Tab("All Tutees", tarea6); //formatted tuteeList
+		tarea6.setStyle("-fx-font: 14 monospace");
+		TabPane tp1 = new TabPane(tab1, tab2, tab3, tab4);
+		tp1.setMinWidth(750);;
+		Button but14 = new Button("Copy Pairings");
+		Button but15 = new Button("Copy Emails");
+		but14.setPrefSize(100, 50);
+		but14.setStyle("-fx-font: 14 calibri;");
+		but15.setPrefSize(100, 50);
+		but15.setStyle("-fx-font: 14 calibri;");
+		VBox vbox4 = new VBox(but14, but15);
+		vbox4.setSpacing(50);
+		vbox4.setAlignment(Pos.CENTER);
+		HBox hbox8 = new HBox(vbox4, tp1);
+		hbox8.setSpacing(50);
+		hbox8.setAlignment(Pos.CENTER);
+		hbox8.setPadding(new Insets(50, 50, 50,50));
+		Scene scene6 = new Scene(hbox8, 1000, 700);
+		Button but16 = new Button("printing"); //only used for the fire method, not to be shown
 
 		//initializers
 		File inFile = new File("C:\\Users\\jolpa\\OneDrive\\Desktop\\Codes\\NHS\\nhs1.txt");
 		File outFile = new File("C:\\Users\\jolpa\\OneDrive\\Desktop\\Codes\\NHS\\nhs2.txt");
-		Scanner input = new Scanner(inFile);		
+		Scanner input3 = new Scanner(outFile);		
 		ArrayList<tutor> tutorList = new ArrayList<>();
 		ArrayList<tutor> tutorList0 = new ArrayList<>();
 		ArrayList<tutor> tutorList1 = new ArrayList<>();
 		ArrayList<tutor> tutorList2 = new ArrayList<>();
 		ArrayList<tutor> tutorList3 = new ArrayList<>();
+		ArrayList<String> tutorEmails = new ArrayList<>();
+		ArrayList<tutee> tuteeList = new ArrayList<>();
 		ArrayList<tutee> tuteeList1 = new ArrayList<>();
 		ArrayList<tutee> tuteeList2 = new ArrayList<>();
 		ArrayList<tutee> tuteeList3 = new ArrayList<>();
@@ -201,12 +311,51 @@ public class NHSTutorALT extends Application {
 		LinkedHashMap<ArrayList<tutor>, ArrayList<ArrayList<tutor>>> tutorMaster = new LinkedHashMap<>();
 		LinkedHashMap<ArrayList<tutee>, ArrayList<ArrayList<tutee>>> tuteeMaster = new LinkedHashMap<>();
 		int[] curDay = {0};
-
+		final Clipboard clipboard = Clipboard.getSystemClipboard();
+		final ClipboardContent content = new ClipboardContent();
+		Calendar cal = new GregorianCalendar();
 
 		//commands
 		but1.setOnAction(e -> stage.setScene(scene2)); //home to input
 		but2.setOnAction(e -> {
-			//read storage file
+			try {
+				ObjectInputStream input = new ObjectInputStream(new FileInputStream(inFile));
+				System.out.println("A");
+				try {
+					System.out.println("B");
+					while (true) {
+						tutor Paul = (tutor) input.readObject();
+						System.out.println("C");
+						if (String.valueOf(Paul.email).equalsIgnoreCase("END")) {
+							break;
+						}
+						tutorList.add(Paul);
+					}					
+					tutorList.forEach(t -> {
+						if (t.dayslots[curDay[0]]){
+							tutorList0.add(t);
+							if (t.timeslots[0]){
+								tutorList1.add(t);
+							}
+							if (t.timeslots[1]){
+								tutorList2.add(t);
+							}
+							if (t.timeslots[2]){
+								tutorList3.add(t);
+							}
+						}						
+					});					
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				input.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			tutorList.forEach(t -> System.out.println(t.email));
+			tutorList.forEach(t -> tutorEmails.add(t.email));
+			Collections.sort(tutorEmails, String.CASE_INSENSITIVE_ORDER);
+			combob1.getItems().addAll(tutorEmails);
 			stage.setScene(scene3);
 		}); //home to minor changes
 		but11.setOnAction(e -> curDay[0] = 0); //assign day to monday
@@ -288,7 +437,6 @@ public class NHSTutorALT extends Application {
 				}			
 			}
 			input1.close();
-			ArrayList<String> tutorEmails = new ArrayList<>();
 			tutorList.forEach(t -> tutorEmails.add(t.email));
 			Collections.sort(tutorEmails, String.CASE_INSENSITIVE_ORDER);
 			combob1.getItems().addAll(tutorEmails);
@@ -350,10 +498,210 @@ public class NHSTutorALT extends Application {
 		but6.setOnAction(e -> stage.setScene(scene4)); //minor tutor info change to tutee
 		but8.setOnAction(e -> {
 			but7.fire();
-			//rewrite tutor info
+			try {
+				ObjectOutputStream output1 = new ObjectOutputStream(new FileOutputStream(inFile));
+				tutorList.forEach(t -> {
+					try {
+						output1.writeObject(t);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				});
+				output1.writeObject(new tutor ("END", new boolean[3], new boolean[2], new boolean[12], 0));
+				output1.close();
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
 			stage.close();
 		}); //minor tutor info change to exit
 		but9.setOnAction(e -> stage.setScene(scene3)); //tutee input to minor tutor info change
+		but16.setOnAction(e -> {
+			String[] t3sa = {""};
+			pairing1.forEach((q, r) -> {
+				t3sa[0] += String.format("%-2d%-12s%-16s%-33s%-33s\n", q.sessionCount, "4:30-5:00", r.subject, q.email, r.email);
+			});
+			pairing2.forEach((q, r) -> {
+				t3sa[0] += String.format("%-2d%-12s%-16s%-33s%-33s\n", q.sessionCount, "5:00-5:30", r.subject, q.email, r.email);
+			});
+			pairing3.forEach((q, r) -> {
+				t3sa[0] += String.format("%-2d%-12s%-16s%-33s%-33s\n", q.sessionCount, "5:30-6:00", r.subject, q.email, r.email);
+			});
+			tarea3.setText(tarea3.getText() + t3sa[0]);
+
+			String[] t4sa = {""};
+			tutorList0.removeAll(pairing1.keySet());
+			tutorList0.removeAll(pairing2.keySet());
+			tutorList0.removeAll(pairing3.keySet());
+			tutorList0.trimToSize();
+			tutorList0.sort((t1, t2) -> t1.subcount - t2.subcount);
+			tutorList0.sort((t1, t2) -> t1.sessionCount - t2.sessionCount);
+			for (int j = 0; j < tutorList0.size(); j++){
+				t4sa[0] += String.format("%-2d%-33s", tutorList0.get(j).sessionCount, tutorList0.get(j).email);
+				if (tutorList0.get(j).timeslots[0]) {
+					t4sa[0] += ("4:30-5:00 ");
+				}
+				else {
+					t4sa[0] += ("          ");
+				}
+				if (tutorList0.get(j).timeslots[1]) {
+					t4sa[0] += ("5:00-5:30 ");
+				}
+				else {
+					t4sa[0] += ("          ");
+				}
+				if (tutorList0.get(j).timeslots[2]) {
+					t4sa[0] += ("5:30-6:00 ");
+				}
+				else {
+					t4sa[0] += ("          ");
+				}
+				for (int k = 0; k < 12; k++) {
+					if (tutorList0.get(j).subjects[k]) {
+						switch (k) {
+							case 0: t4sa[0] += ("English, "); break;
+							case 1: t4sa[0] += ("Government, "); break;
+							case 2: t4sa[0] += ("History, "); break;
+							case 3: t4sa[0] += ("Algebra 1/2, "); break;
+							case 4: t4sa[0] += ("Geometry/Trig, "); break;
+							case 5: t4sa[0] += ("Pre-Calc/Calc, "); break;
+							case 6: t4sa[0] += ("Statistics, "); break;
+							case 7: t4sa[0] += ("Biology, "); break;
+							case 8: t4sa[0] += ("Chemistry, "); break;
+							case 9: t4sa[0] += ("Physics, "); break;
+							case 10: t4sa[0] += ("Comp Sci, "); break;
+							case 11: t4sa[0] += ("SAT/ACT"); break;
+						}
+					}
+				}
+				t4sa[0] += "\n";
+			}
+			tarea4.setText(tarea4.getText() + t4sa[0]);
+
+			String[] t5sa = {""};			
+			tutorList.sort((t1, t2) -> t1.subcount - t2.subcount);
+			tutorList.sort((t1, t2) -> t1.sessionCount - t2.sessionCount);
+			for (int j = 0; j < tutorList.size(); j++){
+				t5sa[0] += String.format("%-2d%-33s", tutorList.get(j).sessionCount, tutorList.get(j).email);
+				if (tutorList.get(j).timeslots[0]) {
+					t5sa[0] += ("4:30-5:00 ");
+				}
+				else {
+					t5sa[0] += ("          ");
+				}
+				if (tutorList.get(j).timeslots[1]) {
+					t5sa[0] += ("5:00-5:30 ");
+				}
+				else {
+					t5sa[0] += ("          ");
+				}
+				if (tutorList.get(j).timeslots[2]) {
+					t5sa[0] += ("5:30-6:00 ");
+				}
+				else {
+					t5sa[0] += ("          ");
+				}
+				for (int k = 0; k < 12; k++) {
+					if (tutorList.get(j).subjects[k]) {
+						switch (k) {
+							case 0: t5sa[0] += ("English, "); break;
+							case 1: t5sa[0] += ("Government, "); break;
+							case 2: t5sa[0] += ("History, "); break;
+							case 3: t5sa[0] += ("Algebra 1/2, "); break;
+							case 4: t5sa[0] += ("Geometry/Trig, "); break;
+							case 5: t5sa[0] += ("Pre-Calc/Calc, "); break;
+							case 6: t5sa[0] += ("Statistics, "); break;
+							case 7: t5sa[0] += ("Biology, "); break;
+							case 8: t5sa[0] += ("Chemistry, "); break;
+							case 9: t5sa[0] += ("Physics, "); break;
+							case 10: t5sa[0] += ("Comp Sci, "); break;
+							case 11: t5sa[0] += ("SAT/ACT"); break;
+						}
+					}
+				}
+				t5sa[0] += "\n";
+			}
+			tarea5.setText(tarea5.getText() + t5sa[0]);
+
+			String[] t6sa = {""};
+			for (int j = 0; j < tuteeList.size(); j++){
+				t6sa[0] += String.format("%-33s", tuteeList.get(j).email);
+				if (tuteeList.get(j).timeslot[0]) {
+					t6sa[0] += ("4:30-5:00 ");
+				}
+				else {
+					t6sa[0] += ("          ");
+				}
+				if (tuteeList.get(j).timeslot[1]) {
+					t6sa[0] += ("5:00-5:30 ");
+				}
+				else {
+					t6sa[0] += ("          ");
+				}
+				if (tuteeList.get(j).timeslot[2]) {
+					t6sa[0] += ("5:30-6:00 ");
+				}
+				else {
+					t6sa[0] += ("          ");
+				}
+				t6sa[0] += tuteeList.get(j).subject + "\n";
+			}
+			tarea6.setText(tarea6.getText() + t6sa[0]);
+		
+			//write tutors to nhs1
+			try {
+				ObjectOutputStream output1 = new ObjectOutputStream(new FileOutputStream(inFile));
+				tutorList.forEach(t -> {
+					try {
+						output1.writeObject(t);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				});
+				output1.writeObject(new tutor ("END", new boolean[3], new boolean[2], new boolean[12], 0));
+				output1.close();
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+			//write pairings to nhs2
+			String[] pairnhs2 = {"", ""};
+			int daydiff = 0;
+			if (curDay[0] == 0){
+				daydiff = 2 - cal.get(Calendar.DAY_OF_WEEK);
+			}
+			else if (curDay[0] == 1) {
+				daydiff = 4 - cal.get(Calendar.DAY_OF_WEEK);
+			}
+			if (daydiff < 0) {
+				daydiff += 7;
+			}
+			int month = cal.get(Calendar.MONTH) + 1;
+			int day = cal.get(Calendar.DAY_OF_MONTH);
+			pairnhs2[0] += month + "/" + (day + daydiff) + "\n";
+			pairing1.forEach((q, r) -> {
+				pairnhs2[0] += String.format("%-2d%-12s%-16s%-33s%-33s\n", q.sessionCount, "4:30-5:00", r.subject, q.email, r.email);
+			});
+			pairing2.forEach((q, r) -> {
+				pairnhs2[0] += String.format("%-2d%-12s%-16s%-33s%-33s\n", q.sessionCount, "4:30-5:00", r.subject, q.email, r.email);
+			});
+			pairing3.forEach((q, r) -> {
+				pairnhs2[0] += String.format("%-2d%-12s%-16s%-33s%-33s\n", q.sessionCount, "4:30-5:00", r.subject, q.email, r.email);
+			});
+			while (true) {
+				String l = input3.nextLine();
+				pairnhs2[1] += l + "\n";
+				if (l.equalsIgnoreCase("END")) {
+					break;
+				}
+			}
+			input3.close();
+			try {
+				PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter(outFile)));
+				output.write(pairnhs2[0] + pairnhs2[1]);
+				output.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}	
+		}); //creates textAreas for printing scene
 		but10.setOnAction(e -> {
 			Scanner input2 = new Scanner(tarea2.getText() + "\nEND");
 			while (true) {  //start tutee
@@ -377,10 +725,14 @@ public class NHSTutorALT extends Application {
 					case "Com": subject = "Comp Sci"; c = input2.next(); break;
 					case "SAT": subject = "SAT/ACT"; break;
 					default:
-						subject = c;
-						while (c.charAt(0) != '4' || c.charAt(0) != '5') {
-							c = input2.next();
-							subject = subject + " " + c;
+						while (true){
+							subject += c;
+							if (input2.hasNext("4:30-5:00") || input2.hasNext("5:00-5:30") || input2.hasNext("5:30-6:00")){
+								break;
+							}
+							else{
+								c = input2.next();
+							}
 						}
 						break;
 				}
@@ -403,15 +755,16 @@ public class NHSTutorALT extends Application {
 						break;
 					}
 				}
-				
+				tutee George = new tutee(email2N, time, subject);
+				tuteeList.add(George);
 				if (time[0]) {
-					tuteeList1.add(new tutee(email2N, time, subject));
+					tuteeList1.add(George);
 				}
 				if (time[1]) {
-					tuteeList2.add(new tutee(email2N, time, subject));
+					tuteeList2.add(George);
 				}
 				if (time[2]) {
-					tuteeList3.add(new tutee(email2N, time, subject));
+					tuteeList3.add(George);
 				} 
 			} //finish adding tutees
 			input2.close();
@@ -470,7 +823,7 @@ public class NHSTutorALT extends Application {
 						case "Phy": m.get(9).add(t); break;
 						case "Com": m.get(10).add(t); break;
 						case "SAT": m.get(11).add(t); break;
-						default: tuteeOTHER.add(t); n.remove(t); break;
+						default: tuteeOTHER.add(t); break;
 					}
 				});
 				n.trimToSize();
@@ -600,11 +953,140 @@ public class NHSTutorALT extends Application {
 				});
 			});
 			//if tuteeOTHER: stage.setScene(tuteeOTHER PAIRINGS);
-			//if !tuteeOTHER: stage.setScene(PRINTING);
-		}); //tutee input through other pairings to printing
+			if (tuteeOTHER.size() > 0){
+				tv1.setItems(FXCollections.observableArrayList(tuteeOTHER));
+				tv1.getColumns().addAll(emailColee, subjectColee);
+				stage.setScene(scene5);
+			}
+			if (tuteeOTHER.size() == 0) {
+				but16.fire();				
+				stage.setScene(scene6);
+			}
+		}); //tutee input and end sequence
+		tv1.setOnMouseClicked(e -> {
+			ArrayList<tutor> tv2al = new ArrayList<>();
+			if (tv1.getSelectionModel().getSelectedItem().timeslot[0]){
+				tv2al.addAll(tutorList1);
+				tv2al.removeAll(pairing1.keySet());
+			}
+			if (tv1.getSelectionModel().getSelectedItem().timeslot[1]){
+				tv2al.addAll(tutorList2);
+				tv2al.removeAll(pairing2.keySet());
+			}
+			if (tv1.getSelectionModel().getSelectedItem().timeslot[2]){
+				tv2al.addAll(tutorList3);
+				tv2al.removeAll(pairing3.keySet());
+			}
+			tv2.getItems().clear();
+			tv2.getColumns().clear();
+			tv2al.sort((t1, t2) -> t1.subcount - t2.subcount);
+			tv2al.sort((t1, t2) -> t1.sessionCount - t2.sessionCount);
+			tv2.setItems(FXCollections.observableArrayList(tv2al));
+			tv2.getColumns().addAll(sessionColor, emailColor, subjectColor);
+		});
+		but13.setOnAction(e -> {
+			if (tv1.getSelectionModel().getSelectedItem().timeslot[0] && tv2.getSelectionModel().getSelectedItem().timeslots[0]){
+				pairing1.put(tv2.getSelectionModel().getSelectedItem(), tv1.getSelectionModel().getSelectedItem());
+			}
+			else if (tv1.getSelectionModel().getSelectedItem().timeslot[1] && tv2.getSelectionModel().getSelectedItem().timeslots[1]){
+				pairing2.put(tv2.getSelectionModel().getSelectedItem(), tv1.getSelectionModel().getSelectedItem());
+			}
+			else if (tv1.getSelectionModel().getSelectedItem().timeslot[2] && tv2.getSelectionModel().getSelectedItem().timeslots[2]){
+				pairing3.put(tv2.getSelectionModel().getSelectedItem(), tv1.getSelectionModel().getSelectedItem());
+			}
+			tv2.getSelectionModel().getSelectedItem().sessionCount++;
+			tutorList0.remove(tv2.getSelectionModel().getSelectedItem());
+			tuteeOTHER.remove(tv1.getSelectionModel().getSelectedItem());
+			tv2.getItems().clear();
+			tv2.getColumns().clear();
+			tv1.getItems().clear();
+			tv1.getColumns().clear();
+			if (tuteeOTHER.size() > 0){
+				tv1.setItems(FXCollections.observableArrayList(tuteeOTHER));
+				tv1.getColumns().addAll(emailColee, subjectColee);
+				stage.setScene(scene5);
+			}
+			if (tuteeOTHER.size() == 0) {
+				but16.fire();
+				stage.setScene(scene6);
+			}
+		}); //tuteeOTHER pairing and end sequence
+		but14.setOnAction(e -> {
+			String[] copStr = {""};
+			ArrayList<String> alTimslot = new ArrayList<>();
+			alTimslot.add("Timeslot");
+			ArrayList<String> alSubject = new ArrayList<>();
+			alSubject.add("Subject");
+			ArrayList<String> alEmailor = new ArrayList<>();
+			alEmailor.add("Tutor Email");
+			ArrayList<String> alEmailee = new ArrayList<>();
+			alEmailee.add("Tutee Email");
+			pairing1.forEach((q, r) -> {
+				alTimslot.add("4:30-5:00");
+				alSubject.add(r.subject);
+				alEmailor.add(q.email);
+				alEmailee.add(r.email);
+			});
+			pairing2.forEach((q, r) -> {
+				alTimslot.add("5:00-5:30");
+				alSubject.add(r.subject);
+				alEmailor.add(q.email);
+				alEmailee.add(r.email);
+			});
+			pairing3.forEach((q, r) -> {
+				alTimslot.add("5:30-6:00");
+				alSubject.add(r.subject);
+				alEmailor.add(q.email);
+				alEmailee.add(r.email);
+			});
+			double[] widths = {0.0, 0.0};
+			alSubject.forEach(s -> {
+				if ((new Text(s)).getBoundsInLocal().getWidth() > widths[0]) {
+					widths[0] = (new Text(s)).getBoundsInLocal().getWidth();
+				}
+			});
+			alEmailor.forEach(s -> {
+				if ((new Text(s)).getBoundsInLocal().getWidth() > widths[1]) {
+					widths[1] = (new Text(s)).getBoundsInLocal().getWidth();
+				}
+			});
+			int[] tabsNeeded = new int[2];
+			double tabWidth = (new Text("\t")).getBoundsInLocal().getWidth();
+			for (int i = 0; i < 2; i++){
+				tabsNeeded[i] = (int) Math.ceil(widths[i] / tabWidth);
+			}
+			for (int i = 0; i < alTimslot.size(); i++) {
+				copStr[0] += alTimslot.get(i) + "\t" + alSubject.get(i);
+				for (int j = 0; j < tabsNeeded[0] - 
+						(int) Math.floor((new Text(alSubject.get(i))).getBoundsInLocal().getWidth() / tabWidth); j++){
+					copStr[0] += "\t";
+				}
+				copStr[0] += alEmailor.get(i);
+				for (int j = 0; j < tabsNeeded[1] - 
+						(int) Math.floor((new Text(alEmailor.get(i))).getBoundsInLocal().getWidth() / tabWidth); j++){
+					copStr[0] += "\t";
+				}
+				copStr[0] += alEmailee.get(i) + "\n";
+			}
+			content.putString(copStr[0]);
+			clipboard.setContent(content);
+		}); //copy pairings to clipboard
+		but15.setOnAction(e -> {
+			String[] emails = {""};
+			pairing1.keySet().forEach(t -> emails[0] += t.email +"\n");
+			pairing2.keySet().forEach(t -> emails[0] += t.email +"\n");
+			pairing3.keySet().forEach(t -> emails[0] += t.email +"\n");
+			pairing1.values().forEach(t -> emails[0] += t.email + "\n");
+			pairing2.values().forEach(t -> emails[0] += t.email + "\n");
+			pairing3.values().forEach(t -> emails[0] += t.email + "\n");
+			content.putString(emails[0]);
+			clipboard.setContent(content);
+		}); //copy emails to clipboard
 	}
 
-	static class tutor{
+	static class tutor implements Serializable{
+		private static final long serialVersionUID = 1L;
+
 		String email;
 		boolean[] timeslots;
 		boolean[] dayslots;

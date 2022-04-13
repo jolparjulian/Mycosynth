@@ -12,22 +12,15 @@ public class Bruh extends Application{
     }
     @Override
     public void start(Stage primaryStage) {
-        GridPane pane = new GridPane();
-        Button ass = new Button("ok");
-        Button but = new Button("uh");
-        ass.setPrefSize(200, 100);
-        pane.setAlignment(Pos.CENTER);
-        pane.setPadding(new Insets(100, 200, 100, 200));
-        pane.setHgap(20);
-        pane.add(ass, 0, 0);
-        pane.add(but, 1, 0);
-        Scene scene = new Scene(pane, 1000, 700);
+        TableView<String> tv = new TableView<>();
+        tv.setEditable(true);
+        TableColumn<String, String> emailCol = new TableColumn<>("email");
+        TableColumn<String, String> subjectCol = new TableColumn<>("subject");
+        TableColumn<String, String> timeCol = new TableColumn<>("times");
+        tv.getColumns().addAll(emailCol, subjectCol, timeCol);
+        VBox pane = new VBox(tv);
+        Scene scene = new Scene(pane, 500, 500);
         primaryStage.setScene(scene);
         primaryStage.show();
-        Button bruh = new Button("bruh");
-        Scene scene2 = new Scene(bruh, 200, 200);
-        ass.setOnAction(e -> {
-            primaryStage.setScene(scene2);
-        });
     }
 }
