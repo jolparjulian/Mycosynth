@@ -9,8 +9,7 @@ import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
@@ -320,12 +319,9 @@ public class NHSTutorALT extends Application {
 		but2.setOnAction(e -> {
 			try {
 				ObjectInputStream input = new ObjectInputStream(new FileInputStream(inFile));
-				System.out.println("A");
 				try {
-					System.out.println("B");
 					while (true) {
 						tutor Paul = (tutor) input.readObject();
-						System.out.println("C");
 						if (String.valueOf(Paul.email).equalsIgnoreCase("END")) {
 							break;
 						}
@@ -352,7 +348,6 @@ public class NHSTutorALT extends Application {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			tutorList.forEach(t -> System.out.println(t.email));
 			tutorList.forEach(t -> tutorEmails.add(t.email));
 			Collections.sort(tutorEmails, String.CASE_INSENSITIVE_ORDER);
 			combob1.getItems().addAll(tutorEmails);
@@ -497,7 +492,6 @@ public class NHSTutorALT extends Application {
 		but5.setOnAction(e -> stage.setScene(scene1)); //minor tutor info change back to home
 		but6.setOnAction(e -> stage.setScene(scene4)); //minor tutor info change to tutee
 		but8.setOnAction(e -> {
-			but7.fire();
 			try {
 				ObjectOutputStream output1 = new ObjectOutputStream(new FileOutputStream(inFile));
 				tutorList.forEach(t -> {
