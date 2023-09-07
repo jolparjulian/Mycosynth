@@ -1,7 +1,8 @@
 package Tests;
 
-public class Oof{
+public class Oof {
     public static void main(String[] args) {
-       
+        System.out.println("hi");
     }
+
 }
