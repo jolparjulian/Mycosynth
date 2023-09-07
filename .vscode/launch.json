@@ -6,17 +6,40 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch Bruh",
+            "name": "Bruh",
             "request": "launch",
-            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-16/lib\" --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-20.0.2/lib\" --add-modules javafx.controls,javafx.fxml",
             "mainClass": "Tests.Bruh",
+            "projectName": "Codes_9ac2b319"
+        },
+        {
+            "type": "java",
+            "name": "Oof",
+            "request": "launch",
+            "mainClass": "Tests.Oof",
+            "projectName": "Codes_9ac2b319"
+        },
+        {
+            "type": "java",
+            "name": "Launch Forensics",
+            "request": "launch",
+            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-20.0.2/lib\" --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "Projects.Matte.Forensics",
             "projectName": "Codes_efaf5fbe"
-        },        
+        },
+        {
+            "type": "java",
+            "name": "Launch FlipFlop",
+            "request": "launch",
+            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-20.0.2/lib\" --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "Projects.Matte.FlipFlop",
+            "projectName": "Codes_efaf5fbe"
+        },
         {
             "type": "java",
             "name": "Launch NHSTutorALT",
             "request": "launch",
-            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-16/lib\" --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-20.0.2/lib\" --add-modules javafx.controls,javafx.fxml",
             "mainClass": "NHS.NHSTutorALT",
             "projectName": "Codes_efaf5fbe"
         },
@@ -25,13 +48,6 @@
             "name": "Launch NHSTutor",
             "request": "launch",
             "mainClass": "NHS.NHSTutor",
-            "projectName": "Codes_efaf5fbe"
-        },
-        {
-            "type": "java",
-            "name": "Launch Oof",
-            "request": "launch",
-            "mainClass": "Tests.Oof",
             "projectName": "Codes_efaf5fbe"
         }
     ]
