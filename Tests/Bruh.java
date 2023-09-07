@@ -22,6 +22,6 @@ public class Bruh extends Application{
     }
     @Override
     public void start(Stage stage) throws FileNotFoundException{
-        System.out.println("hi");
+        System.out.println("hi ");
     }
 }
